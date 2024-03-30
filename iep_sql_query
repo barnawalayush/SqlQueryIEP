@@ -1,0 +1,150 @@
+-- Country with the biggest population (id and name of the country)
+
+-- SELECT c.id, c.name FROM Country AS c ORDER BY c.population DESC LIMIT 1;
+
+
+
+-- Top 10 countries with the lowest population density (names of the countries)
+
+-- SELECT c.name, c.population/c.area AS density 
+-- FROM Country AS c 
+-- ORDER BY c.population/c.area LIMIT 10;
+
+
+
+-- Countries with population density higher than average across all countries
+
+-- SELECT c.name, (c.population/c.area) 
+-- FROM Country AS c 
+-- WHERE c.population/c.area > (
+--     SELECT AVG(c1.population/c1.area) 
+--     FROM Country AS c1
+-- );
+
+
+
+-- Country with the longest name (if several countries have name of the same length, show all of them)
+
+-- SELECT c.name 
+-- FROM Country AS c 
+-- WHERE LENGTH(c.name) = (
+--     SELECT LENGTH(c1.name) 
+--     FROM Country AS c1 
+--     ORDER BY LENGTH(c1.name) DESC 
+--     LIMIT 1
+-- )
+-- ORDER BY LENGTH(c.name) DESC;
+
+
+
+-- All countries with name containing letter “F”, sorted in alphabetical order
+
+-- SELECT c.name FROM Country AS c WHERE SUBSTRING (c.name, 1, 1) = 'F' ORDER BY c.name;
+
+
+
+-- Country which has a population, closest to the average population of all countries
+
+-- SELECT name FROM Country 
+-- ORDER BY ABS(population - (SELECT AVG(population) FROM Country)) 
+-- LIMIT 1;
+
+
+
+-- Count of countries for each continent
+
+-- SELECT continentId, Count(id) as numberOfCountries
+--  FROM Country GROUP BY continentId;
+
+
+
+-- Total area for each continent (print continent name and total area), sorted by area from biggest to smallest
+
+-- SELECT (
+--     SELECT c1.name FROM Continents AS c1 
+--         WHERE c1.id = c.continentId
+--     ), 
+-- SUM(c.area) as totalArea 
+-- FROM Country AS c 
+-- GROUP BY continentId;
+
+
+
+-- Average population density per continent
+
+-- SELECT 
+--     (SELECT c1.name FROM Continents AS c1 
+--         WHERE c1.id = c.continentId
+--     ),
+-- SUM(c.population)/SUM(c.area) as avgPopulationDensity
+--         FROM Country AS c 
+--         GROUP BY continentId;
+
+
+
+
+-- For each continent, find a country with the smallest area (print continent name, country name and area)
+
+-- SELECT (
+--     SELECT c6.name FROM Continents AS c6 
+--     WHERE c6.id = c1.continentId
+--     ) AS continentName, 
+--     c1.name, c1.area FROM Country AS c1 
+-- INNER JOIN 
+--     (
+--         SELECT c.continentId AS c4, MIN(c.area) AS c5 
+--         FROM Country AS c 
+--         GROUP BY continentId
+--     ) AS c2
+--     ON c1.continentId = c2.c4 AND c1.area = c2.c5;
+
+
+
+-- Find all continents, which have average country population less than 20 million
+
+-- SELECT (
+--         SELECT c1.name FROM Country AS c1 WHERE c1.id = c.continentId
+--     ) FROM Country AS c 
+-- GROUP BY c.continentId 
+-- HAVING AVG(c.population) < 20000000;
+
+
+
+-- Person with the biggest number of citizenships
+
+-- SELECT (
+--     SELECT p.name FROM People AS p WHERE p.id = personId
+--     ), COUNT(personId) AS totalCitizenship 
+--     FROM Citizenship 
+--     GROUP BY personId 
+-- ORDER BY COUnt(personId) DESC 
+-- LIMIT 1;
+
+
+
+-- All people who have no citizenship
+
+-- SELECT p.name FROM People AS p LEFT JOIN Citizenship AS c ON c.personId = p.id WHERE c.personId IS NULL;
+
+
+
+
+-- Country with the least people in People table
+
+-- SELECT COUNT(c.countryName), c.countryName 
+--     FROM Citizenship AS c 
+--     GROUP BY c.countryName 
+--     ORDER BY COUNT(c.countryName) 
+--     LIMIT 1; 
+
+
+
+-- Continent with the most people in People table
+
+
+
+-- Find pairs of people with the same name - print 2 ids and the name
+
+-- SELECT p1.id, p2.id, p1.name FROM People AS p1 INNER JOIN People AS p2 
+-- ON p1.name = p2.name
+-- WHERE p1.id < p2.id;

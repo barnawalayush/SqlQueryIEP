@@ -1,0 +1,117 @@
+-- CREATE TABLE gridDynamics.Continents(
+--     id INT PRIMARY KEY,
+--     name varchar(100)
+-- );
+
+-- SELECT * FROM gridDynamics.Continents;
+
+-- INSERT INTO gridDynamics.Continents(id, name) VALUES
+-- (1, 'Asia'),
+-- (2, 'Antarctica'),
+-- (3, 'Africa'),
+-- (4, 'Europe'),
+-- (5, 'North America'),
+-- (6, 'Oceania'),
+-- (7, 'South America');
+
+-- CREATE TABLE gridDynamics.Country(
+--     id INT PRIMARY KEY,
+--     continentId INT,
+--     name varchar(100),
+--     FOREIGN KEY(continentId) REFERENCES gridDynamics.Continents(id)
+-- );
+
+-- INSERT INTO gridDynamics.Country(id, continentId, name, population, area) VALUES
+-- (1, 1, 'India', 1423173173, 3287263),
+-- (2, 1, 'China', 1419933142, 9706961),
+-- (3, 3, 'Morocco', 37082000, 446550),
+-- (4, 3, 'Niger', 3983746, 564038),
+-- (5, 1, 'Iran', 88647384, 942845),
+-- (6, 4, 'Italy', 58937283, 301230),
+-- (7, 4, 'Sweden', 10503729, 450295),
+-- (8, 1, 'Saudi Arabia', 2351443, 847267),
+-- (9, 3, 'Egypt', 11408236, 1002450),
+-- (10, 7, 'Columbia', 635273, 374895),
+-- (11, 4, 'Greece', 326327, 49383),
+-- (12, 5, 'Canada', 12373372, 2843723),
+-- (13, 5, 'United States', 19274733, 2372738),
+-- (14, 6, 'Samoa', 723472, 482782),
+-- (15, 7, 'Brazil', 23773725, 2482498);
+
+-- ALTER TABLE Country MODIFY area DOUBLE;
+
+-- SELECT * FROM gridDynamics.Country;
+
+-- DELETE FROM gridDynamics.Country;
+
+-- SELECT * FROM Country;
+
+-- ALTER TABLE Country ADD area INT DEFAULT 0;
+
+-- CREATE TABLE gridDynamics.People(
+--     id INT PRIMARY KEY,
+--     name VARCHAR(100)
+-- );
+
+-- INSERT INTO People(id, name) VALUES
+-- (1, 'Ayush'),
+-- (2, 'Aniket'),
+-- (3, 'Sahil'),
+-- (4, 'Nayan'),
+-- (5, 'Yagyesh'),
+-- (6, 'Priya'),
+-- (7, 'Hitesh'),
+-- (8, 'Sneha'),
+-- (9, 'Tarun'),
+-- (10, 'Purvesh'),
+-- (11, 'Ansh'),
+-- (12, 'Riya'),
+-- (13, 'Alena'),
+-- (14, 'Sherlock'),
+-- (15, 'Antonio'),
+-- (16, 'Fred');
+
+-- INSERT INTO People VALUES(17, 'Ayush');
+
+-- INSERT INTO People VALUES(18, 'Ansh');
+
+-- SELECT * FROM People;
+
+-- CREATE TABLE gridDynamics.Citizenship(
+--     personId INT, 
+--     countryName VARCHAR(100),
+--     FOREIGN KEY(personId) REFERENCES People(id)  
+-- );
+
+-- SELECT * FROM Citizenship;
+
+-- INSERT INTO Citizenship(personId, countryName) VALUES
+-- (1, 'India'),
+-- (2, 'Aniket'),
+-- (13, 'United States'),
+-- (2, 'Canada'),
+-- (5, 'Egypt'),
+-- (7, 'Italy'),
+-- (8, 'India'),
+-- (14, 'Greece'),
+-- (16, 'Niger'),
+-- (15, 'Iran'),
+-- (3, 'Iran'),
+-- (4, 'Samoa'),
+-- (7, 'Brazil'),
+-- (1, 'Coulubia'),
+-- (9, 'China'),
+-- (8, 'India'),
+-- (5, 'India'),
+-- (9, 'United States'),
+-- (3, 'Saudi Arabia');
+
+-- INSERT INTO Country VALUES(16, 4, 'HERTFORDSHIRE', 1193837, 1640);
+
+-- INSERT INTO Country VALUES
+-- (17, 4, 'Finland', 2393837, 12640);
+-- INSERT INTO Country VALUES
+-- (18, 4, 'France', 530837, 346240);
+
+-- REPLACE  INTO Citizenship SET countryName = 'Greece' WHERE personId = 2 AND countryName = 'Aniket';
+
